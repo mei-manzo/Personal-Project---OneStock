@@ -94,3 +94,11 @@ def logout(request):
     return redirect('/')
 
 #def portfolio , create a dictionary
+def profile(request):
+    if 'user_id' not in request.session:
+        return redirect('/')
+    this_user = User.objects.filter(id = request.session['user_id'])
+    context = {
+            "current_user" : this_user[0].first_name,
+        }
+    return render(request, "profile.html", context)

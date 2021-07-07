@@ -9,13 +9,8 @@
     <title>NASDAQ Stats</title>
 </head>
 <body>
-    <h1> Welcome, {{ current_user }} </h1> <a href="/logout">Logout</a> |
-    <a href="/profile">Profile</a>
-    <h2>NASDAQ</h2>
-    {% for object in progress_dict %}
-    <p>Stock Price: {{ object }} </p>
-    <hr>
-    <br><br>
-    {% endfor %}
+    <h1> {{ current_user }}'s Profile </h1> 
+    <a href="/logout">Logout</a>
+    <p><a href="/feed">Your custom feed</a></p>
 </body>
 </html> 

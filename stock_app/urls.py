@@ -8,4 +8,5 @@ urlpatterns = [
     path('logout', views.logout),
     path('feed', views.feed_parser),
     path('stats', views.stats),
+    path('profile', views.profile),
 ]
