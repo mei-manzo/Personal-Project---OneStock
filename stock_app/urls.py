@@ -7,4 +7,5 @@ urlpatterns = [
     path('check_login', views.check_login),
     path('logout', views.logout),
     path('feed', views.feed_parser),
+    path('stats', views.stats),
 ]

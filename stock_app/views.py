@@ -67,6 +67,30 @@ def feed_parser(request):
         }
     return render(request, "feed.html", context)
 
+def stats(request):
+    if 'user_id' not in request.session:
+        return redirect('/')
+    this_user = User.objects.filter(id = request.session['user_id'])
+    #tenstocks = ["bynd" : https, "amzn": https, "gogl": https]
+    #for key in tenstocks:
+        #URL = key
+        #continue...
+    URL = 'https://www.google.com/finance/quote/BYND:NASDAQ?sa=X&ved=2ahUKEwjJuJGoyr7xAhXVkWoFHX7jA6cQ_AUoAXoECAEQAw'
+    page = requests.get(URL)
+    soup = BeautifulSoup(page.content, 'html.parser')
+    progress = soup.find_all('div', class_='ln0Gqe')
+    progress_dict = []
+    for number in progress:
+        progress_dict.append(number.text)
+    context = {
+            "current_user" : this_user[0].first_name,
+            "progress_dict": progress_dict,
+        }
+    return render(request, "nasdaq.html", context)
+
+
 def logout(request):
     request.session.flush()
     return redirect('/')
+
+#def portfolio , create a dictionary
