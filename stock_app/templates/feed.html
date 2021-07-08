@@ -9,10 +9,10 @@
     <title>Feed</title>
 </head>
 <body>
-    <h1> Welcome, {{ current_user }} </h1> <a href="/logout">Logout</a> | <a href="/stats">NASDAQ Stats</a>
+    <h1> Welcome, {{ current_user }} </h1> <a href="/logout">Logout</a> | <a href="/stats">NASDAQ Stats</a> | <a href="/profile">Profile</a>
     <h2>Your Custom Feed</h2>
     {% for object in header_dict %}
-        <p>{{ object }}</p>
+        <p class="article">{{ object }}</p>
         <hr>
         <br><br>
     {% endfor %}

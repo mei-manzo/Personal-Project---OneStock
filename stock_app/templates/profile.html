@@ -10,8 +10,7 @@
 </head>
 <body>
     <h1> {{ current_user }}'s Profile </h1> 
-    <a href="/logout">Logout</a>
-    <p><a href="/feed">Your custom feed</a></p>
+    <a href="/logout">Logout</a> | <a href="/success"> Return to Dashboard</a>
     {% if messages %}
     <ul class="messages">    
         {% for message in messages %}    
@@ -31,7 +30,7 @@
     <br><br>
     <h3>My Portfolio:</h3>
     {% for stock in portfolio %}
-    <p>Stock name: {{ stock.stock_name }} </p> <a href="/rm-stock/{{ stock.id }}"> Remove </a>
+    Stock name:<a href="/feed/{{ stock.id }}"> {{ stock.stock_name }} </a> | <a href="/rm-stock/{{ stock.id }}"> Remove </a>
     <hr>
     <br><br>
     {% endfor %}

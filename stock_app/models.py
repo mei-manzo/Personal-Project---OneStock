@@ -1,6 +1,7 @@
 from django.db import models
 import re
 import bcrypt
+from django.db.models.fields import TextField
 
 class UserManager(models.Manager):
     def basic_validator(self, postData):
@@ -59,4 +60,6 @@ class Stock(models.Model):
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now= True)
     user = models.ForeignKey(User, related_name = "stocks", on_delete = models.CASCADE)
+    news_url = models.TextField()
+    nasdaq_url = models.TextField()
     objects = StockManager()
