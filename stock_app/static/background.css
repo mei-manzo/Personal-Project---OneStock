@@ -5,3 +5,15 @@ body{
 .article{
     background-color: lightgray;
 }
+
+#container{
+    display: flex;
+}
+
+#one-side{
+    flex:1;
+}
+
+#other-side{
+    flex:1;
+}

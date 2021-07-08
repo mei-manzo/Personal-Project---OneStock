@@ -9,13 +9,20 @@
     <title>NASDAQ Stats</title>
 </head>
 <body>
-    <h1> Welcome, {{ current_user }} </h1> <a href="/logout">Logout</a> |
+    <h1> Welcome, {{ current_user }} </h1> <a href="/logout">Logout</a> | <a href="/success"> Return to Dashboard</a> | <a href="/buy_sell">Buy/Sell</a> |
     <a href="/profile">Profile</a>
-    <h2>NASDAQ</h2>
-    {% for object in progress_dict %}
-    <p>Stock Price: {{ object }} </p>
-    <hr>
-    <br><br>
-    {% endfor %}
+    <h2>Your NASDAQ Stats</h2>
+    <div id="container">
+        <div id = "other-side">
+            {% for stock in this_stock %}
+            <p> {{ stock.stock_name }} </p>
+            {% endfor %}
+        </div>
+        <div id = "one-side">
+            {% for object in progress_dict %}
+            <p>Stock Price: {{ object }} </p>
+            {% endfor %}
+        </div>
+    </div>
 </body>
 </html> 

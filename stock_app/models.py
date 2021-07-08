@@ -41,7 +41,9 @@ class UserManager(models.Manager):
 class StockManager(models.Manager):
     def stock_validator(self, postData):
         errors = {}
-        if (postData['stock-option']) != "GOOGL" and (postData['stock-option']) != "BYND":
+        stocks = ["GOOGL", "BYND", "AMZN"]
+        # if (postData['stock-option']) != "GOOGL" and (postData['stock-option']) != "BYND" :
+        if (postData['stock-option']) not in stocks:
             errors['stock-option'] = "Must enter a valid stock option."
         return errors
 
