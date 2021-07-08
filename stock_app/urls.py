@@ -9,4 +9,5 @@ urlpatterns = [
     path('feed', views.feed_parser),
     path('stats', views.stats),
     path('profile', views.profile),
+    path('check_stock_name', views.check_stock),
 ]

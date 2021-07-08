@@ -98,7 +98,32 @@ def profile(request):
     if 'user_id' not in request.session:
         return redirect('/')
     this_user = User.objects.filter(id = request.session['user_id'])
+    portfolio = Stock.objects.filter(user=User.objects.get(id = request.session['user_id']))
     context = {
             "current_user" : this_user[0].first_name,
+            "portfolio": portfolio,
         }
     return render(request, "profile.html", context)
+
+def check_stock(request):
+    if 'user_id' not in request.session:
+        return redirect('/')
+    else:
+        errors = Stock.objects.stock_validator(request.POST)
+        if len(errors) > 0:
+            for key, value in errors.items():
+                messages.error(request, value)
+            return redirect('/profile')
+        stock_name = request.POST['stock-option']
+        if len(Stock.objects.filter(stock_name=stock_name)) >= 1:
+            messages.error(request, "Stock is already in your portfolio.")
+            return redirect('/profile')
+        #if no issues, add stock to portfolio
+        this_user = User.objects.get(id = request.session['user_id'])
+        new_stock = Stock.objects.create(stock_name=request.POST['stock-option'], user=this_user)
+        portfolio = Stock.objects.filter(user=User.objects.get(id = request.session['user_id']))
+        context = {
+            "current_user" : this_user.first_name,
+            "portfolio": portfolio,
+        }
+        return render(request, "profile.html", context)

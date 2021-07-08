@@ -36,7 +36,13 @@ class UserManager(models.Manager):
         elif bcrypt.checkpw(postData['password'].encode(), existing_user[0].password.encode()) != True:
             errors['password'] = "Email and password do not match"
         return errors
-
+    
+class StockManager(models.Manager):
+    def stock_validator(self, postData):
+        errors = {}
+        if (postData['stock-option']) != "GOOGL" and (postData['stock-option']) != "BYND":
+            errors['stock-option'] = "Must enter a valid stock option."
+        return errors
 
 class User(models.Model):
     first_name = models.CharField(max_length=255)
@@ -47,3 +53,10 @@ class User(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     created_at = models.DateTimeField(auto_now_add = True)
     objects = UserManager()
+
+class Stock(models.Model):
+    stock_name = models.CharField(max_length=45)
+    created_at = models.DateTimeField(auto_now_add = True)
+    updated_at = models.DateTimeField(auto_now= True)
+    user = models.ForeignKey(User, related_name = "stocks", on_delete = models.CASCADE)
+    objects = StockManager()
