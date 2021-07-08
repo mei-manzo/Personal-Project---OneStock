@@ -31,7 +31,7 @@
     <br><br>
     <h3>My Portfolio:</h3>
     {% for stock in portfolio %}
-    <p>Stock name: {{ stock.stock_name }} </p>
+    <p>Stock name: {{ stock.stock_name }} </p> <a href="/rm-stock/{{ stock.id }}"> Remove </a>
     <hr>
     <br><br>
     {% endfor %}

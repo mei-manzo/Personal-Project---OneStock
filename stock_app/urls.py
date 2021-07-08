@@ -10,4 +10,5 @@ urlpatterns = [
     path('stats', views.stats),
     path('profile', views.profile),
     path('check_stock_name', views.check_stock),
+    path('rm-stock/<int:id>', views.remove_stock),
 ]

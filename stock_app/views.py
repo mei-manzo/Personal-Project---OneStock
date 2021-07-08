@@ -115,7 +115,7 @@ def check_stock(request):
                 messages.error(request, value)
             return redirect('/profile')
         stock_name = request.POST['stock-option']
-        if len(Stock.objects.filter(stock_name=stock_name)) >= 1:
+        if len(Stock.objects.filter(stock_name=stock_name, user_id = request.session['user_id'])) >= 1:
             messages.error(request, "Stock is already in your portfolio.")
             return redirect('/profile')
         #if no issues, add stock to portfolio
@@ -127,3 +127,10 @@ def check_stock(request):
             "portfolio": portfolio,
         }
         return render(request, "profile.html", context)
+
+def remove_stock(request, id):
+    if 'user_id' not in request.session:
+        return redirect('/')
+    stock_to_remove = Stock.objects.filter(id = id)
+    stock_to_remove.delete()
+    return redirect('/profile')
