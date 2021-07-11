@@ -64,7 +64,6 @@ class Stock(models.Model):
     user = models.ForeignKey(User, related_name = "stocks", on_delete = models.CASCADE)
     news_url = models.TextField()
     nasdaq_url = models.TextField()
-    article_users = models.ManyToManyField(User, related_name = "article_users")
     objects = StockManager()
 
 class Article(models.Model):
@@ -72,3 +71,5 @@ class Article(models.Model):
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
     hyperlink = models.TextField()
+    stock = models.ForeignKey(Stock, related_name="articles", on_delete = models.CASCADE, null = True)
+    article_user = models.ForeignKey(User, related_name = "user_articles", on_delete = models.CASCADE, null = True)

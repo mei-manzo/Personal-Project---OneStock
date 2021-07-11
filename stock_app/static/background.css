@@ -14,6 +14,10 @@ body{
     flex:1;
 }
 
+#one-side-one{
+    flex:4;
+}
+
 #other-side{
     flex:1;
 }

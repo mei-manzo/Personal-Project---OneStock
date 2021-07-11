@@ -65,14 +65,25 @@ def feed_parser(request, id):
             URL = t[1]
     page = requests.get(URL)
     soup = BeautifulSoup(page.content, 'html.parser')
+    #headers data parsed below:
     headers = soup.find_all('div', class_='BNeawe vvjwJb AP7Wnd')
     header_dict = []
     for h in headers:
-        # header_dict = []
         header_dict.append(h.text)
-        context = {
+    links = soup.find_all('a', style='text-decoration:none;display:block')
+    link_dict = []
+    full_links=[]
+    for link in soup.find_all('a'):
+        input_string = str(link.get('href'))
+        input_string=input_string.replace('/url?q=', "")
+        link_dict.append(input_string)
+    for x in range (16, 36, 2):
+        full_links.append(link_dict[x])
+    
+    context = {
             "current_user" : this_user[0].first_name,
             "header_dict": header_dict,
+            "full_links": full_links,
         }
     return render(request, "feed.html", context)
 
@@ -86,7 +97,10 @@ def stats(request):
         URL = object.nasdaq_url
         page = requests.get(URL)
         soup = BeautifulSoup(page.content, 'html.parser')
+        # progress = list(soup)[1].find_all('div', class_="BNeawe iBp4i AP7Wnd")[0].prettify()
         progress = soup.find_all('div', class_='ln0Gqe')
+        # print(progress_first)
+        # progress=list(list(soup.children)[1].children)[1].find_all('div', class_='ln0Gqe')
         for number in progress:
             progress_dict.append(number.text)
     context = {
